@@ -1,0 +1,155 @@
+{
+  "name": "CAR SHOWRROM CUSTOMER SUPPORT AGENT",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -832,
+        -96
+      ],
+      "id": "de8f3f47-0e3e-48b3-9a2e-4a28af785768",
+      "name": "When chat message received",
+      "webhookId": "e9ff334f-6a84-413a-8a25-9e322b626eed"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -560,
+        -80
+      ],
+      "id": "aebc7663-edf7-47b5-bd98-95f03bd795ea",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        -752,
+        144
+      ],
+      "id": "c8bf16d1-888b-409e-80f7-233926d317f9",
+      "name": "Google Gemini Chat Model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "cEYVNOmBj7NTaolv",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        -528,
+        144
+      ],
+      "id": "7b90105b-fd7e-4704-9bd6-e620bf65688d",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "12NxXT90wsWVFkeTpx6Puo6oOVeuTvAVxapRtLuH2hKM",
+          "mode": "list",
+          "cachedResultName": "CRAZY MOTORSPORTS",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12NxXT90wsWVFkeTpx6Puo6oOVeuTvAVxapRtLuH2hKM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "FAQ",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/12NxXT90wsWVFkeTpx6Puo6oOVeuTvAVxapRtLuH2hKM/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        -304,
+        128
+      ],
+      "id": "43d159e8-80b8-400d-8954-96f51239d8ba",
+      "name": "Get row(s) in sheet in Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "wzcEw6Ntrrz2o5lP",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet in Google Sheets": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "f46f1da5-748d-47e2-b832-537418c9a1e0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "56607017d68f342e45e9cf6aeeae1b9181435c727032b7ef14e62a978ff58395"
+  },
+  "nodeGroups": [],
+  "id": "jsvpL4qtAloKPpGW",
+  "tags": []
+}
